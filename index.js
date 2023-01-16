@@ -32,9 +32,8 @@ mongoose
 //we should use them before routes
 app.use(
   cors({
-    origin: "*",
+    origin: ["http://localhost:5000", "https://bestmart.vercel.app"],
     credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
   })
 );
 app.use(express.json());

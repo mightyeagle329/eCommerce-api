@@ -32,7 +32,7 @@ mongoose
 //we should use them before routes
 app.use(
   cors({
-    origin: ["http://localhost:5000", "https://bestmart.vercel.app/"],
+    origin: ["http://localhost:5000", "https://bestmart.vercel.app"],
     credentials: true, //access-control-allow-credentials:true
   })
 );

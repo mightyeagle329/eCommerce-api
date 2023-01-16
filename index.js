@@ -32,7 +32,7 @@ mongoose
 //we should use them before routes
 app.use(
   cors({
-    origin: true,
+    origin: "*",
     credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
   })

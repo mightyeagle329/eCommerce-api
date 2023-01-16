@@ -66,5 +66,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+// count Category for admin
+router.get("/countCategory", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const c = await Category.countDocuments();
+    res.status(200).json(c);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;

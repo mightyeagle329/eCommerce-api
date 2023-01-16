@@ -94,6 +94,26 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+// count Seller
+router.get("/countSeller", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const c = await User.countDocuments({ accountType: 1 });
+    res.status(200).json(c);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
+// count Customer
+router.get("/countUser", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const c = await User.countDocuments({ accountType: 0 });
+    res.status(200).json(c);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
 //GET USER STATS
 router.get("/stats", verifyTokenAndAdmin, async (req, res) => {
   const date = new Date();

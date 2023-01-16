@@ -151,9 +151,23 @@ router.get("/:seller", async (req, res) => {
 });
 
 // count Seller Product
-router.get("/countSellerProduct/all", verifyTokenAndSeller, async (req, res) => {
+router.get(
+  "/countSellerProduct/all",
+  verifyTokenAndSeller,
+  async (req, res) => {
+    try {
+      const c = await Product.countDocuments({ seller: req.user.username });
+      res.status(200).json(c);
+    } catch (err) {
+      return res.status(500).json(err);
+    }
+  }
+);
+
+// count Product for admin
+router.get("/countProduct/all", verifyTokenAndAdmin, async (req, res) => {
   try {
-    const c = await Product.countDocuments({ seller: req.user.username });
+    const c = await Product.countDocuments();
     res.status(200).json(c);
   } catch (err) {
     return res.status(500).json(err);

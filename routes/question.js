@@ -79,6 +79,16 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
+//GET all Questions by product id
+router.get("/find/:id", async (req, res) => {
+  try {
+    const questions = await Question.find({ productId: req.params.id });
+    res.status(200).json(questions);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //GET all Questions that is already answered by product id
 router.get("/findAnswers/:id", async (req, res) => {
   try {
@@ -98,6 +108,15 @@ router.get("/findAnswers/:id", async (req, res) => {
 router.get("/countSellerQuestion", verifyTokenAndSeller, async (req, res) => {
   try {
     const c = await Question.countDocuments({ seller: req.user.username });
+    res.status(200).json(c);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+// count Question
+router.get("/countQuestion", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const c = await Question.countDocuments();
     res.status(200).json(c);
   } catch (err) {
     return res.status(500).json(err);

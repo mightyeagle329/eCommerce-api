@@ -135,6 +135,16 @@ router.get("/", verifyTokenAndSeller, async (req, res) => {
   }
 });
 
+//GET ALL ORDERS By Admin
+router.get("/all", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const orders = await SellerOrder.find().sort({ createdAt: -1 }).limit(50);
+    res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 //GET order STATS
 router.get("/stats", verifyTokenAndSeller, async (req, res) => {
   const date = new Date();
@@ -203,6 +213,16 @@ router.get("/income", verifyTokenAndAdmin, async (req, res) => {
 router.get("/countSellerOrder", verifyTokenAndSeller, async (req, res) => {
   try {
     const c = await SellerOrder.countDocuments({ seller: req.user.username });
+    res.status(200).json(c);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+});
+
+// count Order by admin
+router.get("/countOrder", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const c = await Order.countDocuments();
     res.status(200).json(c);
   } catch (err) {
     return res.status(500).json(err);

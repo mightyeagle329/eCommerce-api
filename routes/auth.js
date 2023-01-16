@@ -76,7 +76,8 @@ router.post("/login", async (req, res) => {
       .cookie("jwt", accessToken, {
         httpOnly: true,
         expires: new Date(Date.now() + 2592000000), //2592000000 miliseconds = 30 days
-        sameSite: "strict",
+        sameSite: "None",
+        secure: true,
       })
       .json(others); // no need to send message and type of message, client will take user automatically to the homepage
   } catch (err) {

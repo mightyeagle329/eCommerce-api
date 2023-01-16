@@ -3,6 +3,7 @@ const Product = require("../models/Product");
 const {
   verifyToken,
   verifyTokenAndSeller,
+  verifyTokenAndAdmin,
 } = require("../middlewares/verification");
 const { productValidation } = require("../middlewares/validation");
 

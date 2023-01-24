@@ -9,12 +9,15 @@ const WishlistSchema = new mongoose.Schema(
     },
     products: [
       {
-        productId: String,
         title: String,
         img: String,
         price: Number,
+        marketPrice: Number,
+        hasMerchantReturnPolicy: Boolean,
+        seller: String,
+        productId: String,
       },
-    ]
+    ],
   },
   { timestamps: true }
 );

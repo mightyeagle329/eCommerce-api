@@ -8,7 +8,15 @@ const {
 
 //CREATE Wishlist
 router.post("/:id", verifyTokenAndAuthorization, async (req, res) => {
-  const { productId, title, img, price } = req.body;
+  const {
+    productId,
+    title,
+    img,
+    price,
+    seller,
+    marketPrice,
+    hasMerchantReturnPolicy,
+  } = req.body;
   const userId = req.params.id;
   try {
     const wishlist = await Wishlist.findOne({ userId: userId });
@@ -21,7 +29,15 @@ router.post("/:id", verifyTokenAndAuthorization, async (req, res) => {
         //product exists in the Wishlist, do nothing
       } else {
         //product does not exists in Wishlist, add new item
-        wishlist.products.push({ productId, title, img, price });
+        wishlist.products.push({
+          productId,
+          title,
+          img,
+          price,
+          seller,
+          marketPrice,
+          hasMerchantReturnPolicy,
+        });
       }
       await wishlist.save();
       return res.status(201).send(wishlist);
@@ -29,7 +45,17 @@ router.post("/:id", verifyTokenAndAuthorization, async (req, res) => {
       //no Wishlist for user, create new Wishlist
       const newWishlist = await Wishlist.create({
         userId,
-        products: [{ productId, title, img, price }],
+        products: [
+          {
+            productId,
+            title,
+            img,
+            price,
+            seller,
+            marketPrice,
+            hasMerchantReturnPolicy,
+          },
+        ],
       });
       return res.status(201).send(newWishlist);
     }

@@ -16,7 +16,6 @@ const CartSchema = new mongoose.Schema(
         price: Number,
         marketPrice: Number,
         seller: String,
-        sellerId: String,
         hasMerchantReturnPolicy: Boolean,
       },
     ],

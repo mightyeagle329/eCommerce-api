@@ -17,7 +17,7 @@ router.post("/:id", verifyTokenAndAuthorization, async (req, res) => {
     marketPrice,
     hasMerchantReturnPolicy,
   } = req.body;
-  console.log(req.body);
+
   const userId = req.params.id;
 
   try {
@@ -74,7 +74,7 @@ router.post("/:id", verifyTokenAndAuthorization, async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).send("Something went wrong");
+    res.status(500).json("Something went wrong");
   }
 });
 

@@ -121,14 +121,14 @@ router.post("/forgot-pass", async (req, res) => {
     let mailOption = {
       from: "irakibm@gmail.com",
       to: user.email,
-      subject: `Mess Meal Tracker - Reset Password`,
+      subject: `Bestmart - Reset Password`,
       text: `Dear ${user.username},\nDid you just request to reset your password? If you did not, simply ignore this email.\nFollow this link to reset your password. This Link will be invalid after one hour and can only be used one time. \nLink: ${link}\nThank you for using mess meal tracker.\nIf you have any query regarding the site, please reply to this mail.`,
     };
 
     transporter.sendMail(mailOption, function (err, data) {
       if (err) {
         return res.json(
-          "There has been some error while sending the mail by our side."
+          "There has been some error while sending the mail from our side."
         );
       } else {
         return res

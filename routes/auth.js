@@ -4,6 +4,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 const {
   addUserValidation,
   loginValidation,
@@ -118,8 +119,9 @@ router.post("/forgot-pass", async (req, res) => {
       },
     });
 
+
     let mailOption = {
-      from: "irakibm@gmail.com",
+      from: "rakify14@gmail.com",
       to: user.email,
       subject: `Bestmart - Reset Password`,
       text: `Dear ${user.username},\nDid you just request to reset your password? If you did not, simply ignore this email.\nFollow this link to reset your password. This Link will be invalid after one hour and can only be used one time. \nLink: ${link}\nThank you for using mess meal tracker.\nIf you have any query regarding the site, please reply to this mail.`,
@@ -170,12 +172,9 @@ router.post("/reset-pass/:id/:token", async (req, res) => {
   }
 });
 
-
 //LOGOUT
 router.get("/logout", (req, res) => {
   res.status(200).clearCookie("jwt").json({ logout: true });
 });
-
-
 
 module.exports = router;

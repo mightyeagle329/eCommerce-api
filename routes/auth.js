@@ -12,7 +12,6 @@ const {
 
 //REGISTER
 router.post("/register", async (req, res) => {
-  //console.log(req.body);
   const { error } = addUserValidation(req.body);
 
   if (error) return res.status(400).json(error.details[0]);

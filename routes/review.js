@@ -6,7 +6,6 @@ const {
   verifyTokenAndSeller,
 } = require("../middlewares/verification");
 
-
 //Customer
 
 // CREATE A Review
@@ -41,10 +40,13 @@ router.post("/:reviewId", verifyToken, async (req, res) => {
   }
 });
 
-//GET all reviews by product id
+//GET all reviews which are approved by admin by single product id
 router.get("/find/:id", async (req, res) => {
   try {
-    const reviews = await Review.find({ productId: req.params.id })
+    const reviews = await Review.find({
+      productId: req.params.id,
+      status: true,
+    })
       .populate("user", "-password -isAdmin -accountType")
       .populate("product");
     res.status(200).json(reviews);
@@ -52,7 +54,6 @@ router.get("/find/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 //Seller
 
@@ -91,7 +92,6 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 });
 
 //Admin
-
 
 //GET all reviews by admin
 router.get("/all", verifyTokenAndAdmin, async (req, res) => {

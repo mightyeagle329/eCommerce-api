@@ -79,7 +79,7 @@ router.get("/", verifyTokenAndSeller, async (req, res) => {
 });
 
 //GET all reviews by seller
-router.get("/", verifyTokenAndSeller, async (req, res) => {
+router.get("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const reviews = await Review.find({ seller: req.user.username })
       .populate("user", "-password -isAdmin -accountType")
